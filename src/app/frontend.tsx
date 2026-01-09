@@ -5,17 +5,27 @@
  * It is included in `src/index.html`.
  */
 
-import { StrictMode } from 'react'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { createRoot } from 'react-dom/client'
-import App from './App'
+import { routeTree } from './routeTree.gen'
+
+// Set up a Router instance
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+})
+
+// Register things for typesafety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
 
 // biome-ignore lint/style/noNonNullAssertion: The root element is guaranteed to exist.
 const elem = document.getElementById('root')!
-const app = (
-  <StrictMode>
-    <App />
-  </StrictMode>
-)
+const app = <RouterProvider router={router} />
 
 if (import.meta.hot) {
   // With hot module reloading, `import.meta.hot.data` is persisted.
