@@ -47,6 +47,7 @@ export function APITester() {
           <SelectContent align="start">
             <SelectItem value="GET">GET</SelectItem>
             <SelectItem value="PUT">PUT</SelectItem>
+            <SelectItem value="POST">POST</SelectItem>
           </SelectContent>
         </Select>
         <Label htmlFor="endpoint" className="sr-only">
