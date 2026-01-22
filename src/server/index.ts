@@ -8,10 +8,9 @@ const app = new Elysia()
   .use(apiController)
   .mount(authController.fetch)
   .get('/*', async ({ server, set }) => {
-    // biome-ignore lint/style/noNonNullAssertion: cannot be null here
-    const res = await fetch(server!.url!)
     set.headers['Content-Type'] = 'text/html'
-    return await res.text()
+    // biome-ignore lint/style/noNonNullAssertion: cannot be null here
+    return fetch(server!.url!).then(res => res.text())
   })
   .listen(3000)
 
