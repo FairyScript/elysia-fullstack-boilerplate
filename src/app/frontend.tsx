@@ -8,6 +8,7 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { createRoot } from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
+import './index.css'
 
 // Set up a Router instance
 const router = createRouter({
@@ -23,16 +24,15 @@ declare module '@tanstack/react-router' {
   }
 }
 
-// biome-ignore lint/style/noNonNullAssertion: The root element is guaranteed to exist.
-const elem = document.getElementById('root')!
 const app = <RouterProvider router={router} />
 
-if (import.meta.hot) {
-  // With hot module reloading, `import.meta.hot.data` is persisted.
-  // biome-ignore lint/suspicious/noAssignInExpressions: This is intentional.
-  const root = (import.meta.hot.data.root ??= createRoot(elem))
+function start() {
+  const root = createRoot(document.getElementById('root')!)
   root.render(app)
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', start)
 } else {
-  // The hot module reloading API is not available in production.
-  createRoot(elem).render(app)
+  start()
 }

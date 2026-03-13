@@ -1,16 +1,15 @@
-@import './styles/globals.css';
+@import 'tailwindcss';
 
 @layer base {
   :root {
-    @apply font-sans;
+    @apply text-[rgba(255,255,255,0.87)] bg-[#242424] font-sans;
   }
 
   body {
-    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0 bg-background text-foreground;
+    @apply grid place-items-center min-w-[320px] min-h-screen relative m-0;
   }
 }
 
-/* cool Bun background animation 😎 */
 body::before {
   content: '';
   position: fixed;
@@ -28,7 +27,6 @@ body::before {
   from {
     background-position: 0 0;
   }
-
   to {
     background-position: 256px 224px;
   }
@@ -38,7 +36,6 @@ body::before {
   from {
     transform: rotate(0);
   }
-
   to {
     transform: rotate(360deg);
   }
